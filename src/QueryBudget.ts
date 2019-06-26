@@ -22,17 +22,28 @@ export default class QueryBudget {
       const budgetYear = moment(budget.getDate()).year();
       const budgetMonth = moment(budget.getDate()).month() + 1;
 
-      if (startYear === budgetYear && startMonth === budgetMonth) {
-        // budgetAmount = budget.getAmount();
-        const startValidDays = this.getStartValidDays(start);
-        console.log(startValidDays);
+      if (
+        startYear === budgetYear &&
+        startMonth === budgetMonth &&
+        endYear === budgetYear &&
+        endMonth === budgetMonth
+      ) {
+        const startValidDays = moment(end).diff(moment(start), "days") + 1;
         const amountPerDay = this.getAmountPerDay(budget);
         validAmountList.push(startValidDays * amountPerDay);
-      } else if (endYear === budgetYear && endMonth === budgetMonth) {
-        const endValidDays = this.getEndValidDays(end);
-        const amountPerDay = this.getAmountPerDay(budget);
-        //console.log(amountPerDay);
-        validAmountList.push(endValidDays * amountPerDay);
+      } else {
+        if (startYear === budgetYear && startMonth === budgetMonth) {
+          // budgetAmount = budget.getAmount();
+          const startValidDays = this.getStartValidDays(start);
+          const amountPerDay = this.getAmountPerDay(budget);
+          validAmountList.push(startValidDays * amountPerDay);
+        }
+        if (endYear === budgetYear && endMonth === budgetMonth) {
+          const endValidDays = this.getEndValidDays(end);
+          const amountPerDay = this.getAmountPerDay(budget);
+
+          validAmountList.push(endValidDays * amountPerDay);
+        }
       }
     });
 

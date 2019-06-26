@@ -41,20 +41,20 @@ describe("QueryBudget.ts", () => {
     done();
   });
 
-  // it("should be cross month'", done => {
-  //   class TestAPI implements IBudgetService {
-  //     findAllBudget = () => {
-  //       return [new Budget("2019/8", 31000), new Budget("2019/9", 30000)];
-  //     };
-  //   }
+  it("should be cross month'", done => {
+    class TestAPI implements IBudgetService {
+      findAllBudget = () => {
+        return [new Budget("2019/8", 31000), new Budget("2019/9", 30000)];
+      };
+    }
 
-  //   queryBudget = new QueryBudget(new TestAPI());
+    queryBudget = new QueryBudget(new TestAPI());
 
-  //   const start = new Date("2019-08-31");
-  //   const end = new Date("2019-09-01");
-  //   const result = queryBudget.query(start, end);
-  //   expect(result).toBe(2000);
+    const start = new Date("2019-08-31");
+    const end = new Date("2019-09-01");
+    const result = queryBudget.query(start, end);
+    expect(result).toBe(2000);
 
-  //   done();
-  // });
+    done();
+  });
 });
